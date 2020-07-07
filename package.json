@@ -22,6 +22,7 @@
     "scale-map"
   ],
   "author": "小刘先森",
+  "homepage": "https://github.com/geocompass/mapscale",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.2.0",
