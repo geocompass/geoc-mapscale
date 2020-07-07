@@ -2,7 +2,7 @@
   "name": "mapscale",
   "version": "0.1.0",
   "description": "地图比例尺生成工具",
-  "main": "index.js",
+  "main": "dist/mapscale.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack/webpack.config.js",
