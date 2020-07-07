@@ -1,5 +1,5 @@
 {
-  "name": "mapscale",
+  "name": "@geocompass/mapscale",
   "version": "1.0.0",
   "description": "地图比例尺生成工具",
   "main": "dist/mapscale.js",
