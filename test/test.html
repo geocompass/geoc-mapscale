@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="800" style="position: absolute;z-index: 100;"></canvas>
+    <div id="map" style="width: 800px; height: 800px; z-index: 10;">
+
+    </div>
+
+
+    <script src="./mapscale.js"></script>
+    <!-- <script src="./test.js"></script>-->
+    <!-- <script >  </script> -->
+    <script>
+        mapboxgl.Map.prototype.getScale = function (width) {
+            const y = this._container.clientHeight / 2;
+            const left = this.unproject([0, y]);
+            const right = this.unproject([width, y]);
+            const meters = left.distanceTo(right);
+            return meters
+        }
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'http://vt.geo-compass.com/geocmap/api/v1/map/10001000187/publish', // stylesheet location
+            // center: [120.7, 31.2], // starting position [lng, lat]
+            // zoom: 9 // starting zoom
+        });
+        var scale = new mapboxgl.ScaleControl({
+            maxWidth: 38,
+            unit: 'metric'
+        });
+        map.addControl(scale);
+
+        // var Draw = new MapboxDraw();
+
+        // map.addControl(Draw);
+        map.getCanvas().style.cursor = "default";
+        map.on('load', () => {
+            // console.log(map.getBounds())
+            map.addSource('points', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [
+                        {
+                            // feature for Mapbox DC
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [
+                                    120.932766,
+                                    31.174592
+                                ]
+                            },
+                            'properties': {
+                                'title': 'Mapbox DC',
+                                'icon': 'monument'
+                            }
+                        },
+                        {
+                            // feature for Mapbox DC
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [
+                                    120.3997,
+                                    31.47811
+                                ]
+                            },
+                            'properties': {
+                                'title': 'Mapbox DC',
+                                'icon': 'monument'
+                            }
+                        },
+                    ]
+                }
+            });
+            map.addLayer({
+                'id': 'points',
+                'type': 'circle',
+                'source': 'points',
+                'layout': {
+                }
+            });
+            const ctx = document.getElementById('canvas').getContext('2d')
+            var mapscale = new MapScale(Math.floor(580000),{dpi:300})
+            console.log(mapscale.singleSegmentPixelWH.width)
+            ctx.drawImage(mapscale.getCanvas(), 0, 0)
+        })
+
+    </script>
+</body>
+
+</html>
