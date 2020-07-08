@@ -1,6 +1,6 @@
 {
   "name": "geoc-mapscale",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "地图比例尺生成工具",
   "main": "dist/mapscale.js",
   "scripts": {
@@ -24,6 +24,12 @@
   "author": "小刘先森",
   "homepage": "https://github.com/geocompass/mapscale",
   "license": "MIT",
+  "browser": {
+    "canvas": false,
+    "jsdom": false,
+    "jsdom/lib/jsdom/living/generated/utils": false,
+    "jsdom/lib/jsdom/utils": false
+  },
   "devDependencies": {
     "eslint": "^7.2.0",
     "eslint-config-egg": "^8.0.1",
